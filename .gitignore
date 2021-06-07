@@ -1,2 +1,9 @@
 # Project exclude paths
 /target/
+/English.pdf
+/Science.pdf
+/Science.txt
+/Report.pdf
+/Mathematics.pdf
+/Mathematics.txt
+/src/main/resources/Credentials

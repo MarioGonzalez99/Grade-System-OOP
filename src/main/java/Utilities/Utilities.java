@@ -102,6 +102,7 @@ public class Utilities {
             students.add(student);
             System.out.println("Student "+student.getName()+" added successfully");
         }
+        reader.close();
     }
 
     /*

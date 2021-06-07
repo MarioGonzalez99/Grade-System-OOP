@@ -12,10 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Properties;
@@ -200,8 +197,9 @@ public class Report {
     */
     private static void sendEmail(String email, String subject) {
         try {
-            final String username = "grades.system.kodigo@gmail.com";
-            final String password = "K0D1G0123";
+            String[] credentials = getCredentials();
+            final String username = credentials[0];
+            final String password = credentials[1];
 
             Properties prop = new Properties();
             prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -241,5 +239,26 @@ public class Report {
         } catch (MessagingException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static String[] getCredentials(){
+        File file = new File("src/main/resources/Credentials");
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            System.out.println("The credentials file couldn't be located, please make sure to have entered a valid path");
+        }
+        String username = null; // Username will be in first line of file
+        String password = null;
+        try {
+            assert reader != null;
+            username = reader.readLine();
+            password = reader.readLine();
+        } catch (IOException e) {
+            System.out.println("Incorrect values in credentials file");
+        }
+
+        return new String[]{username,password};
     }
 }
