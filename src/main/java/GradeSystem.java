@@ -16,7 +16,7 @@ public class GradeSystem {
         do{
             // Load subject
             Subject subject = getSubject();
-            if (subject == null) continue; // If no valid subject is selected ask again
+            if (subject == null) continue; // If no valid subject is selected continue to next iteration and ask again
 
             //Display subject menu and return if the user wants to change subject or exit program
             exitProgram = subjectMenu(subject);
