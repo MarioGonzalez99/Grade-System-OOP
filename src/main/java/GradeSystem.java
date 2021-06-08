@@ -1,6 +1,3 @@
-import Entities.English;
-import Entities.Mathematics;
-import Entities.Science;
 import Entities.Subject;
 import Utilities.Utilities;
 import Utilities.Report;
@@ -48,9 +45,9 @@ public class GradeSystem {
         Subject subject;
         byte optionNumber = Utilities.getOptionNumber(IN);
         switch (optionNumber){
-            case 1 -> subject = new Mathematics();
-            case 2 -> subject = new Science();
-            case 3 -> subject = new English();
+            case 1 -> subject = new Subject("Mathematics");
+            case 2 -> subject = new Subject("Science");
+            case 3 -> subject = new Subject("English");
             default -> {
                 return null;
             }

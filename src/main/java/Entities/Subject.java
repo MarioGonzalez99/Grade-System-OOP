@@ -1,17 +1,21 @@
 package Entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
-public interface Subject {
+@Getter @Setter
+public class Subject {
 
-    List<Student> getStudents();
+    private List<Student> students;
+    private String email;
+    private String name;
 
-    String getEmail();
+    public Subject(String name){
+        this.name = name;
+    }
 
-    void setStudents(List<Student> students);
-
-    void setEmail(String email);
-
-    String toString();
-
+    @Override
+    public String toString() { return name; }
 }
