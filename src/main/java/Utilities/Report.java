@@ -196,16 +196,11 @@ public class Report {
     * A method to send the report towards an specified address
     */
     private static void sendEmail(String email, String subject) {
-        try {
-            String[] credentials = getCredentials();
-            final String username = credentials[0];
-            final String password = credentials[1];
-
+        try(InputStream input = new FileInputStream("src/main/resources/config.properties")) {
             Properties prop = new Properties();
-            prop.put("mail.smtp.host", "smtp.gmail.com");
-            prop.put("mail.smtp.port", "587");
-            prop.put("mail.smtp.auth", "true");
-            prop.put("mail.smtp.starttls.enable", "true"); //TLS
+            prop.load(input);
+            String username = prop.getProperty("username");
+            String password = prop.getProperty("password");
 
             Session session = Session.getInstance(prop, new Authenticator() {
                 @Override
@@ -239,26 +234,5 @@ public class Report {
         } catch (MessagingException | IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private static String[] getCredentials(){
-        File file = new File("src/main/resources/Credentials");
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(file));
-        } catch (FileNotFoundException e) {
-            System.out.println("The credentials file couldn't be located, please make sure to have entered a valid path");
-        }
-        String username = null; // Username will be in first line of file
-        String password = null;
-        try {
-            assert reader != null;
-            username = reader.readLine();
-            password = reader.readLine();
-        } catch (IOException e) {
-            System.out.println("Incorrect values in credentials file");
-        }
-
-        return new String[]{username,password};
     }
 }
