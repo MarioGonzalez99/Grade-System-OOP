@@ -48,7 +48,7 @@ public class Report {
 
         // Send email to address specified in the first line of the file
         sendEmail(subject.getEmail(), subject.toString());
-        System.out.print("The email was sent successfully\n\n");
+        System.out.print("The email was sent to "+subject.getEmail()+" successfully\n\n");
     }
 
     /*
